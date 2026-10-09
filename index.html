@@ -4,10 +4,11 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <meta name="theme-color" content="#eef4ff">
-  <title>Tính tiền hoàn sản phẩm</title>
+  <title>Tính Tiền Hoàn Sản Phẩm Online</title>
   <style>
     :root{font-family:Inter,system-ui,-apple-system,"Segoe UI",sans-serif;color-scheme:light;--bg:#eef4ff;--panel:#fff;--text:#172b4d;--muted:#687991;--border:#dbe5f2;--primary:#2563eb;--primarydeep:#1d4ed8;--green:#087b4a;--greensoft:#ecfdf5;--shadow:0 18px 54px rgba(30,64,120,.10)}
     *{box-sizing:border-box}body{margin:0;background:radial-gradient(circle at top left,#dae9ff,transparent 38%),var(--bg);color:var(--text);min-height:100vh}body.dark{color-scheme:dark;--bg:#0e1728;--panel:#172338;--text:#eef4ff;--muted:#b5c1d1;--border:#35445d;--primary:#76a7ff;--primarydeep:#497ee9;--green:#8af2bf;--greensoft:#183f35;--shadow:0 18px 55px rgba(0,0,0,.25)}
+    .donate{max-width:620px;margin:28px auto 0;text-align:center;padding:23px}.donate-title{display:flex;align-items:center;justify-content:center;gap:9px;margin:0 0 8px;font-size:19px}.donate-desc{margin:0 0 18px;color:var(--muted);font-size:13px;line-height:1.7}.donate-info{display:grid;gap:10px;text-align:left;max-width:390px;margin:0 auto}.donate-line{display:flex;align-items:center;justify-content:space-between;gap:12px;font-size:14px}.donate-line span{color:var(--muted)}.donate-line strong{text-align:right;overflow-wrap:anywhere}.donate-actions{display:flex;gap:10px;align-items:center;justify-content:center;flex-wrap:wrap;margin:17px 0}.donate-qr{display:block;width:192px;height:192px;object-fit:contain;margin:14px auto 7px;border:1px solid var(--border);border-radius:14px;background:white;padding:8px}.qr-notice{font-size:12px;color:var(--muted);line-height:1.6}.donate-status{min-height:20px;font-size:12px;color:var(--green);margin-top:6px}
     .container{max-width:1120px;margin:auto;padding:35px 18px 60px}.top{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:26px}.brand{display:flex;align-items:center;gap:12px;font-size:14px;font-weight:750;color:var(--primarydeep)}.brand-icon{display:grid;place-items:center;width:43px;height:43px;border-radius:13px;background:#dbeafe;font-size:22px}.toggle{border:1px solid var(--border);background:var(--panel);border-radius:12px;color:var(--text);padding:11px 15px;cursor:pointer;font:inherit}.heading{margin:0 0 8px;font-size:clamp(27px,4vw,39px);letter-spacing:-1px}.subtitle{color:var(--muted);margin:0 0 28px;line-height:1.6}.columns{display:grid;grid-template-columns:1.08fr .92fr;gap:22px;align-items:start}.panel{background:var(--panel);border:1px solid var(--border);box-shadow:var(--shadow);border-radius:22px;padding:25px}.panel h2{font-size:20px;margin:0 0 7px}.panel .hint{font-size:13px;color:var(--muted);line-height:1.5;margin:0 0 22px}.form-grid{display:grid;grid-template-columns:minmax(0,1fr);gap:17px}.field{display:flex;flex-direction:column;gap:8px}.field.full{grid-column:1/-1}label{font-size:13px;font-weight:700}input{width:100%;height:47px;background:var(--panel);border:1px solid var(--border);border-radius:11px;padding:0 12px;font:inherit;font-size:15px;color:var(--text);outline:0;min-width:0}input:focus{border-color:var(--primary);box-shadow:0 0 0 3px rgba(37,99,235,.12)}input::placeholder{color:#94a3b8}.note{font-size:12px;color:var(--muted);line-height:1.55}.actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:25px}button{font:inherit;font-weight:700;cursor:pointer;transition:transform .15s,background .15s}button:hover{transform:translateY(-1px)}.primary{border:0;border-radius:12px;background:#2563eb;color:white;padding:14px 21px;flex:1}.primary:hover{background:#1d4ed8}.secondary{border:1px solid var(--border);background:var(--panel);color:var(--text);padding:13px 17px;border-radius:12px}.error{display:none;margin-top:16px;padding:12px;border-radius:10px;background:#fff0f0;color:#a51d2d;font-size:13px;line-height:1.5}.error.show{display:block}.badge{display:inline-flex;align-items:center;gap:6px;border-radius:30px;padding:6px 10px;background:var(--greensoft);color:var(--green);font-size:12px;font-weight:800}.amount-card{background:linear-gradient(135deg,#effdf5,#e6f8ef);padding:22px;border-radius:17px;margin:20px 0;color:#075d38}.dark .amount-card{background:#124032;color:#c5ffdf}.amount-card .caption{font-size:12px;font-weight:800;letter-spacing:.55px}.amount{font-weight:850;font-size:clamp(26px,4vw,39px);letter-spacing:-.8px;margin-top:9px;overflow-wrap:anywhere}.small{font-size:12px;opacity:.85;margin-top:7px}.details{display:grid;gap:0}.detail{display:flex;justify-content:space-between;align-items:flex-start;gap:16px;border-bottom:1px solid var(--border);padding:13px 0;font-size:14px}.detail:last-child{border:0}.detail span:first-child{color:var(--muted)}.detail strong{text-align:right;overflow-wrap:anywhere;max-width:60%}.section-label{font-size:12px;font-weight:800;letter-spacing:1px;text-transform:uppercase;color:var(--muted);margin:22px 0 3px}.copy{width:100%;margin-top:21px}.placeholder{display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:315px;text-align:center;color:var(--muted);gap:12px}.placeholder .symbol{font-size:48px}.placeholder h3{color:var(--text);margin:0}.placeholder p{max-width:280px;line-height:1.6;margin:0;font-size:14px}.hidden{display:none!important}.footnote{font-size:12px;line-height:1.7;color:var(--muted);margin-top:22px}.result-enter{animation:rise .3s ease-out}@keyframes rise{from{opacity:.1;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}@media(max-width:800px){.columns{grid-template-columns:1fr}}@media(max-width:480px){.container{padding:20px 12px 45px}.panel{padding:19px;border-radius:17px}.form-grid{grid-template-columns:1fr}.heading{font-size:28px}.actions>*{width:100%}}
   </style>
 </head>
@@ -18,7 +19,7 @@
     <p class="subtitle">Nhập thông tin đơn hàng để tính giá trị thời gian còn lại của sản phẩm và khoản hoàn sau khi trừ 5% phí.</p>
     <div class="columns">
       <section class="panel" aria-labelledby="inputHeading">
-        <h2 id="inputHeading">📋 Thông tin sản phẩm</h2><p class="hint">Điền đầy đủ các thông tin bên dưới. Nhập số ngày sử dụng của acc (ví dụ: 30, 60, 90 ngày). Mỗi thông tin nằm trên một dòng riêng.</p>
+        <h2 id="inputHeading">📋 Thông tin sản phẩm</h2><p class="hint">Điền đầy đủ các thông tin bên dưới. Nhập số ngày sử dụng của acc (ví dụ: 30, 60, 90 ngày). </p>
         <form id="refundForm" novalidate>
           <div class="form-grid">
             <div class="field"><label for="buyer">Tên người mua</label><input id="buyer" type="text" maxlength="120" placeholder="Nguyễn Văn A" required autocomplete="name"></div>
@@ -48,6 +49,19 @@
         <div class="footnote">Công thức: <strong>Số ngày đã dùng = Ngày hoàn − Ngày mua; Số ngày còn lại = Max(0, Date acc − Số ngày đã dùng)</strong>.<br>Tiền hoàn = Tiền mua × (Số ngày còn lại / Date acc) × 95%. Nếu acc đã hết date, tiền hoàn bằng 0 VNĐ. Đây là phép tính ước tính theo thời gian.</div>
       </section>
     </div>
+    <section class="panel donate" aria-labelledby="donateHeading">
+      <h2 id="donateHeading" class="donate-title">❤️ Ủng hộ / Donate</h2>
+      <p class="donate-desc">Nếu công cụ hữu ích, bạn có thể ủng hộ mình một ly cà phê ☕<br>Hoàn toàn tự nguyện, không ảnh hưởng đến việc sử dụng công cụ.</p>
+      <div class="donate-info">
+        <div class="donate-line"><span>Ngân hàng</span><strong>MB BANK</strong></div>
+        <div class="donate-line"><span>Số tài khoản</span><strong id="donateAccount">0981251350</strong></div>
+        <div class="donate-line"><span>Chủ tài khoản</span><strong>DINH VAN TRUONG</strong></div>
+      </div>
+      <div class="donate-actions"><button class="primary" style="flex:0 1 auto" type="button" id="copyAccount">📋 SAO CHÉP STK</button></div>
+      <img class="donate-qr" alt="Mã QR VietQR để chuyển khoản ủng hộ tài khoản MB BANK 0981251350, DINH VAN TRUONG" width="192" height="192" loading="lazy" referrerpolicy="no-referrer" src="https://img.vietqr.io/image/MB-0981251350-compact2.png?accountName=DINH%20VAN%20TRUONG">
+      <div class="qr-notice" id="qrNotice">Quét mã QR bằng ứng dụng ngân hàng để chuyển khoản.<br>Mã QR cần kết nối Internet để hiển thị.</div>
+      <div class="donate-status" id="donateStatus" role="status" aria-live="polite"></div>
+    </section>
   </main>
   <script>
     'use strict';
@@ -86,6 +100,16 @@
     $('resetButton').addEventListener('click',()=>{$('refundForm').reset();setToday();$('error').classList.remove('show');$('results').classList.add('hidden');$('placeholder').classList.remove('hidden');copyText='';$('copyButton').textContent='📋 SAO CHÉP KẾT QUẢ';});
     $('copyButton').addEventListener('click',async()=>{try{if(navigator.clipboard&&window.isSecureContext){await navigator.clipboard.writeText(copyText);}else{const area=document.createElement('textarea');area.value=copyText;area.style.position='fixed';area.style.opacity='0';document.body.append(area);area.select();const ok=document.execCommand('copy');area.remove();if(!ok)throw Error('Không thể sao chép');}$('copyButton').textContent='✓ ĐÃ SAO CHÉP';}catch(e){$('copyButton').textContent='Không sao chép được — vui lòng thử lại';}});
     $('themeToggle').addEventListener('click',()=>{document.body.classList.toggle('dark');const dark=document.body.classList.contains('dark');$('themeToggle').textContent=dark?'☀️ Chế độ sáng':'🌙 Chế độ tối';});
+    const copyPlainText = async text => {
+      if (navigator.clipboard && window.isSecureContext) return navigator.clipboard.writeText(text);
+      const area=document.createElement('textarea');area.value=text;area.style.position='fixed';area.style.opacity='0';document.body.appendChild(area);area.select();
+      const ok=document.execCommand('copy');area.remove();if(!ok) throw new Error('Copy failed');
+    };
+    $('copyAccount').addEventListener('click',async()=>{
+      try { await copyPlainText('0981251350');$('donateStatus').textContent='✓ Đã sao chép số tài khoản 0981251350';$('copyAccount').textContent='✓ ĐÃ SAO CHÉP STK'; }
+      catch { $('donateStatus').textContent='Không thể tự động sao chép. Hãy chọn và sao chép số tài khoản phía trên.'; }
+    });
+    document.querySelector('.donate-qr').addEventListener('error',()=>{$('qrNotice').textContent='Chưa tải được mã QR. Bạn vẫn có thể chuyển khoản bằng thông tin tài khoản ở trên.';});
     setToday();
   </script>
 </body>
