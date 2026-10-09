@@ -1,175 +1,92 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="vi">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="theme-color" content="#f5f8ff">
-  <title>Tính tiền hoàn | Refund Calculator</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#eef4ff">
+  <title>Tính tiền hoàn sản phẩm</title>
   <style>
-    :root{color-scheme:light;--bg:#f5f8ff;--card:#fff;--text:#17233c;--muted:#687892;--border:#e1e8f2;--primary:#2563eb;--primary-deep:#174dbf;--soft:#edf4ff;--green:#078459;--green-bg:#eaf9f2;--error:#c42c4c;--shadow:0 18px 55px rgba(31,62,116,.09)}
-    :root[data-theme="dark"]{color-scheme:dark;--bg:#101827;--card:#1b2638;--text:#edf3ff;--muted:#a6b4c9;--border:#35435a;--primary:#70a2ff;--primary-deep:#a8c6ff;--soft:#243753;--green:#60e0a6;--green-bg:#193d36;--error:#ff91a9;--shadow:0 18px 60px rgba(0,0,0,.20)}
-    *{box-sizing:border-box}body{margin:0;background:radial-gradient(circle at 8% 0%,rgba(66,133,255,.10),transparent 32%),var(--bg);font:15px/1.55 system-ui,-apple-system,"Segoe UI",sans-serif;color:var(--text);min-height:100vh}button,input{font:inherit}button{cursor:pointer}button:focus-visible,input:focus-visible{outline:3px solid rgba(58,124,247,.30);outline-offset:2px}
-    .container{max-width:1080px;padding:32px 20px 64px;margin:auto}.top{display:flex;align-items:center;justify-content:space-between;gap:16px;margin-bottom:28px}.brand{display:flex;align-items:center;gap:11px;font-weight:800;font-size:18px;letter-spacing:-.4px}.brand-icon{display:grid;place-items:center;width:42px;height:42px;background:var(--primary);color:#fff;border-radius:13px;font-size:23px}.theme{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:10px 14px;color:var(--text)}.eyebrow{color:var(--primary);font-size:12px;font-weight:800;text-transform:uppercase;letter-spacing:1.5px}.hero{margin:15px 0 28px}.hero h1{font-size:clamp(30px,5vw,46px);line-height:1.17;letter-spacing:-1.6px;margin:10px 0}.hero p{color:var(--muted);margin:0;max-width:680px}.layout{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,.95fr);gap:22px;align-items:start}.panel{background:var(--card);border:1px solid var(--border);box-shadow:var(--shadow);border-radius:22px;padding:28px}.panel-heading{display:flex;align-items:center;gap:11px;margin-bottom:23px}.small-icon{width:37px;height:37px;border-radius:11px;background:var(--soft);display:grid;place-items:center;font-size:19px}.panel h2{font-size:19px;margin:0;letter-spacing:-.4px}.sub{color:var(--muted);font-size:13px;margin:3px 0 0}.fields{display:grid;grid-template-columns:1fr 1fr;gap:18px 15px}.field.full{grid-column:1/-1}label{display:block;font-weight:650;margin-bottom:7px;font-size:13px}.req{color:var(--error)}input{width:100%;height:48px;border:1px solid var(--border);border-radius:11px;background:var(--card);color:var(--text);padding:0 14px;transition:border-color .2s}input::placeholder{color:var(--muted)}input:focus{border-color:var(--primary)}.input-wrap{position:relative}.input-wrap input{padding-right:55px}.suffix{position:absolute;right:14px;top:12px;color:var(--muted);pointer-events:none}.hint{font-size:12px;color:var(--muted);margin:7px 0 0}.modes{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:13px}.mode{display:flex;gap:7px;align-items:center;font-size:13px;font-weight:500}.mode input{width:16px;height:16px;accent-color:var(--primary)}.mode input:focus-visible{outline-offset:1px}.hidden{display:none!important}.alert{color:var(--error);background:color-mix(in srgb,var(--error) 8%,transparent);border-radius:10px;margin-top:18px;padding:10px 13px;font-size:13px}.actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:24px}.btn{min-height:47px;border-radius:11px;border:1px solid var(--border);padding:12px 16px;font-weight:750}.btn-primary{color:#fff;background:#2563eb;border-color:#2563eb;flex:1}.btn-primary:hover{background:#174dbf}.btn-secondary{background:var(--card);color:var(--text)}.btn-secondary:hover{background:var(--soft)}.result-summary{border-radius:16px;background:var(--green-bg);padding:22px;margin:0 0 21px}.result-label{color:var(--green);font-size:13px;font-weight:750}.money{color:var(--green);font-size:clamp(26px,3.7vw,37px);letter-spacing:-1px;font-weight:850;line-height:1.3;margin-top:8px;overflow-wrap:anywhere}.result-note{font-size:12px;color:var(--muted);margin-top:4px}.result-list{margin:0;display:grid;gap:0}.result-row{display:flex;justify-content:space-between;gap:16px;padding:12px 0;border-bottom:1px solid var(--border)}.result-row dt{color:var(--muted)}.result-row dd{margin:0;font-weight:700;text-align:right}.result-row:last-child{border-bottom:0}.copy{width:100%;margin-top:21px}.muted-result{margin-top:18px;color:var(--muted);font-size:13px}.policy{margin-top:22px;background:var(--soft);border-radius:14px;padding:18px}.policy-title{font-weight:800;margin:0 0 9px}.policy-line{display:flex;justify-content:space-between;gap:14px;padding:7px 0;font-size:13px}.policy-line span:last-child{font-weight:750}.foot{margin-top:23px;color:var(--muted);font-size:12px;text-align:center}.animate{animation:rise .3s ease-out}@keyframes rise{from{opacity:.35;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}@media(max-width:790px){.layout{grid-template-columns:1fr}.container{padding-top:19px}.panel{padding:22px}}@media(max-width:420px){.fields{grid-template-columns:1fr}.field.full{grid-column:auto}.top{align-items:flex-start}.brand{font-size:16px}.hero h1{letter-spacing:-.9px}.actions .btn{width:100%}}
+    :root{font-family:Inter,system-ui,-apple-system,"Segoe UI",sans-serif;color-scheme:light;--bg:#eef4ff;--panel:#fff;--text:#172b4d;--muted:#687991;--border:#dbe5f2;--primary:#2563eb;--primarydeep:#1d4ed8;--green:#087b4a;--greensoft:#ecfdf5;--shadow:0 18px 54px rgba(30,64,120,.10)}
+    *{box-sizing:border-box}body{margin:0;background:radial-gradient(circle at top left,#dae9ff,transparent 38%),var(--bg);color:var(--text);min-height:100vh}body.dark{color-scheme:dark;--bg:#0e1728;--panel:#172338;--text:#eef4ff;--muted:#b5c1d1;--border:#35445d;--primary:#76a7ff;--primarydeep:#497ee9;--green:#8af2bf;--greensoft:#183f35;--shadow:0 18px 55px rgba(0,0,0,.25)}
+    .container{max-width:1120px;margin:auto;padding:35px 18px 60px}.top{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:26px}.brand{display:flex;align-items:center;gap:12px;font-size:14px;font-weight:750;color:var(--primarydeep)}.brand-icon{display:grid;place-items:center;width:43px;height:43px;border-radius:13px;background:#dbeafe;font-size:22px}.toggle{border:1px solid var(--border);background:var(--panel);border-radius:12px;color:var(--text);padding:11px 15px;cursor:pointer;font:inherit}.heading{margin:0 0 8px;font-size:clamp(27px,4vw,39px);letter-spacing:-1px}.subtitle{color:var(--muted);margin:0 0 28px;line-height:1.6}.columns{display:grid;grid-template-columns:1.08fr .92fr;gap:22px;align-items:start}.panel{background:var(--panel);border:1px solid var(--border);box-shadow:var(--shadow);border-radius:22px;padding:25px}.panel h2{font-size:20px;margin:0 0 7px}.panel .hint{font-size:13px;color:var(--muted);line-height:1.5;margin:0 0 22px}.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:17px}.field{display:flex;flex-direction:column;gap:8px}.field.full{grid-column:1/-1}label{font-size:13px;font-weight:700}input{width:100%;height:47px;background:var(--panel);border:1px solid var(--border);border-radius:11px;padding:0 12px;font:inherit;font-size:15px;color:var(--text);outline:0;min-width:0}input:focus{border-color:var(--primary);box-shadow:0 0 0 3px rgba(37,99,235,.12)}input::placeholder{color:#94a3b8}.note{font-size:12px;color:var(--muted);line-height:1.55}.actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:25px}button{font:inherit;font-weight:700;cursor:pointer;transition:transform .15s,background .15s}button:hover{transform:translateY(-1px)}.primary{border:0;border-radius:12px;background:#2563eb;color:white;padding:14px 21px;flex:1}.primary:hover{background:#1d4ed8}.secondary{border:1px solid var(--border);background:var(--panel);color:var(--text);padding:13px 17px;border-radius:12px}.error{display:none;margin-top:16px;padding:12px;border-radius:10px;background:#fff0f0;color:#a51d2d;font-size:13px;line-height:1.5}.error.show{display:block}.badge{display:inline-flex;align-items:center;gap:6px;border-radius:30px;padding:6px 10px;background:var(--greensoft);color:var(--green);font-size:12px;font-weight:800}.amount-card{background:linear-gradient(135deg,#effdf5,#e6f8ef);padding:22px;border-radius:17px;margin:20px 0;color:#075d38}.dark .amount-card{background:#124032;color:#c5ffdf}.amount-card .caption{font-size:12px;font-weight:800;letter-spacing:.55px}.amount{font-weight:850;font-size:clamp(26px,4vw,39px);letter-spacing:-.8px;margin-top:9px;overflow-wrap:anywhere}.small{font-size:12px;opacity:.85;margin-top:7px}.details{display:grid;gap:0}.detail{display:flex;justify-content:space-between;align-items:flex-start;gap:16px;border-bottom:1px solid var(--border);padding:13px 0;font-size:14px}.detail:last-child{border:0}.detail span:first-child{color:var(--muted)}.detail strong{text-align:right;overflow-wrap:anywhere;max-width:60%}.section-label{font-size:12px;font-weight:800;letter-spacing:1px;text-transform:uppercase;color:var(--muted);margin:22px 0 3px}.copy{width:100%;margin-top:21px}.placeholder{display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:315px;text-align:center;color:var(--muted);gap:12px}.placeholder .symbol{font-size:48px}.placeholder h3{color:var(--text);margin:0}.placeholder p{max-width:280px;line-height:1.6;margin:0;font-size:14px}.hidden{display:none!important}.footnote{font-size:12px;line-height:1.7;color:var(--muted);margin-top:22px}.result-enter{animation:rise .3s ease-out}@keyframes rise{from{opacity:.1;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}@media(max-width:800px){.columns{grid-template-columns:1fr}}@media(max-width:480px){.container{padding:20px 12px 45px}.panel{padding:19px;border-radius:17px}.form-grid{grid-template-columns:1fr}.heading{font-size:28px}.actions>*{width:100%}}
   </style>
 </head>
 <body>
   <main class="container">
-    <header class="top"><div class="brand"><span class="brand-icon" aria-hidden="true">↺</span><span>Hoàn Tiền <span style="color:var(--primary)">Smart</span></span></div><button class="theme" id="themeBtn" type="button" aria-label="Đổi chế độ sáng tối">☾ Chế độ tối</button></header>
-    <section class="hero"><div class="eyebrow">Công cụ tính toán · VNĐ</div><h1>Tính tiền hoàn<br>nhanh chóng & chính xác</h1><p>Nhập ngày mua, số tiền và ngày tính hoàn để xem số tiền được hoàn theo chính sách hoặc tỷ lệ tùy chỉnh.</p></section>
-    <div class="layout">
-      <section class="panel" aria-labelledby="formTitle">
-        <div class="panel-heading"><div class="small-icon" aria-hidden="true">🗓️</div><div><h2 id="formTitle">Thông tin đơn hàng</h2><p class="sub">Điền thông tin để bắt đầu tính toán</p></div></div>
+    <header class="top"><div class="brand"><span class="brand-icon">↩</span> HOÀN TIỀN SẢN PHẨM</div><button type="button" class="toggle" id="themeToggle" aria-label="Đổi giao diện sáng tối">🌙 Chế độ tối</button></header>
+    <h1 class="heading">Tính tiền hoàn sản phẩm</h1>
+    <p class="subtitle">Nhập thông tin đơn hàng để tính giá trị thời gian còn lại của sản phẩm và khoản hoàn sau khi trừ 5% phí.</p>
+    <div class="columns">
+      <section class="panel" aria-labelledby="inputHeading">
+        <h2 id="inputHeading">📋 Thông tin sản phẩm</h2><p class="hint">Điền đầy đủ các thông tin bên dưới. “Date hàng” được hiểu là ngày hết hạn sử dụng sản phẩm.</p>
         <form id="refundForm" novalidate>
-          <div class="fields">
-            <div class="field full"><label for="amount">Số tiền mua hàng <span class="req">*</span></label><div class="input-wrap"><input id="amount" type="text" inputmode="numeric" autocomplete="off" placeholder="Ví dụ: 1.500.000" required><span class="suffix">VNĐ</span></div></div>
-            <div class="field"><label for="purchaseDate">Ngày mua hàng <span class="req">*</span></label><input id="purchaseDate" type="date" required></div>
-            <div class="field"><label for="refundDate">Ngày tính hoàn <span class="req">*</span></label><input id="refundDate" type="date" required></div>
-            <div class="field full"><label>Phương thức tính tỷ lệ hoàn</label><div class="modes"><label class="mode"><input type="radio" name="rateMode" value="auto" checked> Theo chính sách</label><label class="mode"><input type="radio" name="rateMode" value="manual"> Tự nhập tỷ lệ</label></div><div class="input-wrap hidden" id="manualWrap"><input id="manualRate" type="number" min="0" max="100" step="any" placeholder="Ví dụ: 75" disabled><span class="suffix">%</span></div><p class="hint" id="modeHint">Tự động áp dụng tỷ lệ theo số ngày đã qua.</p></div>
+          <div class="form-grid">
+            <div class="field"><label for="buyer">Tên người mua</label><input id="buyer" type="text" maxlength="120" placeholder="Nguyễn Văn A" required autocomplete="name"></div>
+            <div class="field"><label for="product">Tên sản phẩm</label><input id="product" type="text" maxlength="150" placeholder="Tên mặt hàng" required></div>
+            <div class="field"><label for="money">Số tiền mua (VNĐ)</label><input id="money" type="text" inputmode="numeric" placeholder="Ví dụ: 1.500.000" required><span class="note">Tổng số tiền của toàn bộ số lượng sản phẩm.</span></div>
+            <div class="field"><label for="quantity">Số lượng</label><input id="quantity" type="number" min="1" max="1000000" step="1" value="1" required></div>
+            <div class="field"><label for="expiry">Date hàng (ngày hết hạn)</label><input id="expiry" type="date" required></div>
+            <div class="field"><label for="purchase">Ngày mua</label><input id="purchase" type="date" required></div>
+            <div class="field full"><label for="refund">Ngày hoàn tiền</label><input id="refund" type="date" required></div>
           </div>
-          <div id="error" class="alert hidden" role="alert" aria-live="polite"></div>
-          <div class="actions"><button class="btn btn-primary" type="submit">↗ TÍNH TIỀN HOÀN</button><button class="btn btn-secondary" type="button" id="resetBtn">↺ LÀM MỚI</button></div>
+          <div class="error" id="error" role="alert" aria-live="polite"></div>
+          <div class="actions"><button class="primary" type="submit">💰 TÍNH TIỀN HOÀN</button><button class="secondary" id="resetButton" type="button">↻ LÀM MỚI</button></div>
         </form>
       </section>
-      <section class="panel" aria-labelledby="resultTitle">
-        <div class="panel-heading"><div class="small-icon" aria-hidden="true">💰</div><div><h2 id="resultTitle">Kết quả hoàn tiền</h2><p class="sub">Chi tiết số tiền được hoàn lại</p></div></div>
-        <div id="resultArea" aria-live="polite">
-          <div class="result-summary"><div class="result-label">TỔNG SỐ TIỀN ĐƯỢC HOÀN</div><div id="refundTotal" class="money">— VNĐ</div><div class="result-note" id="resultNote">Nhập thông tin rồi nhấn “Tính tiền hoàn”.</div></div>
-          <dl class="result-list">
-            <div class="result-row"><dt>Ngày mua hàng</dt><dd id="outPurchase">—</dd></div>
-            <div class="result-row"><dt>Ngày tính hoàn</dt><dd id="outRefund">—</dd></div>
-            <div class="result-row"><dt>Số ngày đã qua</dt><dd id="outDays">—</dd></div>
-            <div class="result-row"><dt>Số tiền mua</dt><dd id="outAmount">—</dd></div>
-            <div class="result-row"><dt>Tỷ lệ hoàn</dt><dd id="outRate">—</dd></div>
-            <div class="result-row"><dt>Số tiền khấu trừ</dt><dd id="outDeduction">—</dd></div>
-          </dl>
-          <button type="button" class="btn btn-secondary copy" id="copyBtn" disabled>▣ SAO CHÉP KẾT QUẢ</button>
+      <section class="panel" aria-labelledby="resultHeading">
+        <h2 id="resultHeading">🧾 Kết quả hoàn tiền</h2><p class="hint">Kết quả được tính theo tỷ lệ thời gian sử dụng, không áp dụng bảng mức hoàn.</p>
+        <div id="placeholder" class="placeholder"><div class="symbol">🧮</div><h3>Chưa có kết quả</h3><p>Nhập thông tin bên trái rồi bấm “Tính tiền hoàn” để xem chi tiết.</p></div>
+        <div id="results" class="hidden" aria-live="polite">
+          <span class="badge">✓ Đã tính toán</span>
+          <div class="amount-card"><div class="caption">TỔNG SỐ TIỀN ĐƯỢC HOÀN</div><div class="amount" id="rAmount">0 VNĐ</div><div class="small">Đã trừ 5% phí hoàn sản phẩm</div></div>
+          <div class="section-label">Thông tin đơn hàng</div>
+          <div class="details"><div class="detail"><span>Tên người mua</span><strong id="rBuyer"></strong></div><div class="detail"><span>Tên sản phẩm</span><strong id="rProduct"></strong></div><div class="detail"><span>Số lượng</span><strong id="rQuantity"></strong></div><div class="detail"><span>Ngày mua</span><strong id="rPurchase"></strong></div><div class="detail"><span>Ngày hoàn</span><strong id="rRefund"></strong></div><div class="detail"><span>Date hàng (hết hạn)</span><strong id="rExpiry"></strong></div></div>
+          <div class="section-label">Chi tiết tính toán</div>
+          <div class="details"><div class="detail"><span>Số ngày thiếu (còn lại đến hết hạn)</span><strong id="rRemaining"></strong></div><div class="detail"><span>Số ngày đã sử dụng</span><strong id="rUsed"></strong></div><div class="detail"><span>Tổng thời gian sử dụng</span><strong id="rTotalDays"></strong></div><div class="detail"><span>Giá trị ước tính / 1 ngày</span><strong id="rDaily"></strong></div><div class="detail"><span>Giá trị còn lại trước phí</span><strong id="rBase"></strong></div><div class="detail"><span>Phí hoàn sản phẩm (5%)</span><strong id="rFee"></strong></div></div>
+          <button class="secondary copy" type="button" id="copyButton">📋 SAO CHÉP KẾT QUẢ</button>
         </div>
-        <div class="policy"><div class="policy-title">📋 Chính sách hoàn tiền mẫu</div><div id="policyList"></div><p class="hint">Các mức dưới đây chỉ là ví dụ. Bạn có thể sửa trong biến <code>REFUND_POLICY</code> của JavaScript.</p></div>
+        <div class="footnote">Công thức: <strong>Giá trị còn lại = Tiền mua × (Số ngày còn lại / Tổng số ngày từ lúc mua đến hết hạn)</strong>.<br>Tiền hoàn = Giá trị còn lại × 95%. Nếu sản phẩm đã hết hạn, số tiền hoàn bằng 0 VNĐ. Đây là phép tính ước lượng theo thời gian, không phải quy định hoàn tiền pháp lý.</div>
       </section>
     </div>
-    <p class="foot">Công cụ tính toán tham khảo · Vui lòng đối chiếu với chính sách hoàn tiền thực tế.</p>
   </main>
   <script>
     'use strict';
-    // CHỈNH CHÍNH SÁCH Ở ĐÂY: maxDays tính bao gồm ngày cuối mốc.
-    // Infinity nghĩa là tất cả ngày sau mốc cuối. Tỷ lệ thuộc khoảng 0–100.
-    const REFUND_POLICY = [
-      { maxDays: 7, rate: 100 },
-      { maxDays: 15, rate: 80 },
-      { maxDays: 30, rate: 50 },
-      { maxDays: Infinity, rate: 0 }
-    ];
-
+    // Mức phí hoàn cố định, có thể đổi tại đây.
+    const REFUND_FEE_RATE = 0.05;
     const $ = id => document.getElementById(id);
-    const amountInput = $('amount');
-    const purchaseInput = $('purchaseDate');
-    const refundInput = $('refundDate');
-    let copiedText = '';
-    const currency = value => new Intl.NumberFormat('vi-VN', { maximumFractionDigits: 0 }).format(value) + ' VNĐ';
-    const formatDate = raw => { const [year, month, day] = raw.split('-'); return `${day}/${month}/${year}`; };
-    // Dùng Date.UTC để so sánh ngày lịch (không bị ảnh hưởng bởi DST và múi giờ).
-    function parseCalendarDate(raw) {
-      if (!/^\d{4}-\d{2}-\d{2}$/.test(raw)) return null;
-      const [y, m, d] = raw.split('-').map(Number);
-      const timestamp = Date.UTC(y, m - 1, d);
-      const date = new Date(timestamp);
-      if (date.getUTCFullYear() !== y || date.getUTCMonth() + 1 !== m || date.getUTCDate() !== d) return null;
-      return timestamp;
-    }
-    function todayLocal() {
-      const d = new Date();
-      return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;
-    }
-    function policyRate(days) {
-      const policy = REFUND_POLICY.find(row => days <= row.maxDays);
-      return policy ? policy.rate : 0;
-    }
-    function showError(message) { $('error').textContent = message; $('error').classList.remove('hidden'); }
-    function clearError() { $('error').textContent = ''; $('error').classList.add('hidden'); }
-    function showDefaultResult() {
-      ['outPurchase','outRefund','outDays','outAmount','outRate','outDeduction'].forEach(id => $(id).textContent='—');
-      $('refundTotal').textContent='— VNĐ'; $('resultNote').textContent='Nhập thông tin rồi nhấn “Tính tiền hoàn”.';
-      $('copyBtn').disabled=true; copiedText='';
-    }
-    function renderPolicy() {
-      let previous = -1;
-      $('policyList').replaceChildren();
-      for (const item of REFUND_POLICY) {
-        const line = document.createElement('div'); line.className='policy-line';
-        const range = document.createElement('span');
-        range.textContent = item.maxDays === Infinity ? `Trên ${previous} ngày` : `${previous + 1}–${item.maxDays} ngày`;
-        const rate = document.createElement('span'); rate.textContent = `${item.rate}%`;
-        line.append(range, rate); $('policyList').append(line); previous = item.maxDays;
-      }
-    }
-    function updateRateMode() {
-      const manual = document.querySelector('input[name="rateMode"]:checked').value === 'manual';
-      $('manualWrap').classList.toggle('hidden', !manual);
-      $('manualRate').disabled = !manual;
-      $('modeHint').textContent = manual ? 'Nhập tỷ lệ hoàn từ 0 đến 100%.' : 'Tự động áp dụng tỷ lệ theo số ngày đã qua.';
-      clearError(); showDefaultResult();
-    }
-    // Chỉ nhận tiền VNĐ nguyên dương, định dạng nhóm ba chữ số.
-    amountInput.addEventListener('input', () => {
-      const digits = amountInput.value.replace(/\D/g, '');
-      amountInput.value = digits ? new Intl.NumberFormat('vi-VN').format(Number(digits)) : '';
-      clearError();
+    const formatMoney = n => Math.round(n).toLocaleString('vi-VN') + ' VNĐ';
+    const formatDay = s => { const [y,m,d] = s.split('-'); return `${d}/${m}/${y}`; };
+    // Dùng UTC để phép trừ ngày không bị ảnh hưởng bởi DST / giờ địa phương.
+    const toUTCday = s => { const [y,m,d] = s.split('-').map(Number); const date=new Date(Date.UTC(y,m-1,d)); return date.getUTCFullYear()===y && date.getUTCMonth()===m-1 && date.getUTCDate()===d ? date.getTime()/86400000 : NaN; };
+    const todayLocal = () => {const d=new Date();return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;};
+    const setToday = () => { $('refund').value=todayLocal(); };
+    const error = msg => { $('error').textContent=msg; $('error').classList.add('show'); $('results').classList.add('hidden'); $('placeholder').classList.remove('hidden'); };
+    const value = id => $(id).value.trim();
+    let copyText = '';
+    $('money').addEventListener('input', e => { let raw=e.target.value.replace(/\D/g,'').replace(/^0+(?=\d)/,''); e.target.value=raw ? Number(raw).toLocaleString('vi-VN') : ''; });
+    $('refundForm').addEventListener('submit', e => {
+      e.preventDefault();$('error').classList.remove('show');
+      const buyer=value('buyer'),product=value('product'),purchase=value('purchase'),expiry=value('expiry'),refund=value('refund');
+      const rawMoney=value('money').replace(/\D/g,'');
+      const money=Number(rawMoney),quantity=Number(value('quantity'));
+      if(!buyer||!product||!purchase||!expiry||!refund||!rawMoney||!value('quantity')) return error('Vui lòng nhập đầy đủ tất cả thông tin.');
+      if(!Number.isSafeInteger(money)||money<=0) return error('Số tiền mua phải là số nguyên dương hợp lệ.');
+      if(!Number.isSafeInteger(quantity)||quantity<=0||quantity>1000000) return error('Số lượng phải là số nguyên từ 1 đến 1.000.000.');
+      const p=toUTCday(purchase),x=toUTCday(expiry),r=toUTCday(refund);
+      if(![p,x,r].every(Number.isFinite)) return error('Một hoặc nhiều ngày không hợp lệ.');
+      if(x<=p) return error('Date hàng phải sau ngày mua để tính được giá trị trên mỗi ngày.');
+      if(r<p) return error('Ngày hoàn tiền không được trước ngày mua.');
+      const totalDays=x-p, used=Math.min(r-p,totalDays),remaining=Math.max(0,x-r);
+      const daily=money/totalDays,base=money*remaining/totalDays,fee=base*REFUND_FEE_RATE,finalRefund=Math.round(base-fee);
+      const fields={rBuyer:buyer,rProduct:product,rQuantity:quantity.toLocaleString('vi-VN'),rPurchase:formatDay(purchase),rRefund:formatDay(refund),rExpiry:formatDay(expiry),rRemaining:remaining+' ngày',rUsed:used+' ngày',rTotalDays:totalDays+' ngày',rDaily:daily.toLocaleString('vi-VN',{maximumFractionDigits:2})+' VNĐ/ngày',rBase:formatMoney(base),rFee:formatMoney(fee),rAmount:formatMoney(finalRefund)};
+      for(const [id,text] of Object.entries(fields)) $(id).textContent=text;
+      copyText=['KẾT QUẢ HOÀN TIỀN',`Tên người mua: ${buyer}`,`Tên sản phẩm: ${product}`,`Số lượng: ${fields.rQuantity}`,`Tiền mua: ${formatMoney(money)}`,`Ngày mua: ${fields.rPurchase}`,`Ngày hoàn: ${fields.rRefund}`,`Date hàng: ${fields.rExpiry}`,`Số ngày thiếu: ${fields.rRemaining}`,`Số ngày đã sử dụng: ${fields.rUsed}`,`Giá trị ước tính / 1 ngày: ${fields.rDaily}`,`Giá trị còn lại trước phí: ${fields.rBase}`,`Phí hoàn (5%): ${fields.rFee}`,`TỔNG SỐ TIỀN ĐƯỢC HOÀN: ${fields.rAmount}`].join('\n');
+      $('placeholder').classList.add('hidden');$('results').classList.remove('hidden');$('results').classList.remove('result-enter');void $('results').offsetWidth;$('results').classList.add('result-enter');
     });
-    document.querySelectorAll('input[name="rateMode"]').forEach(radio => radio.addEventListener('change', updateRateMode));
-    $('refundForm').addEventListener('submit', event => {
-      event.preventDefault(); clearError();
-      const rawAmount = amountInput.value.replace(/\D/g, '');
-      const amount = Number(rawAmount);
-      const boughtAt = parseCalendarDate(purchaseInput.value);
-      const refundedAt = parseCalendarDate(refundInput.value);
-      if (!rawAmount || !Number.isSafeInteger(amount) || amount <= 0) return showError('Vui lòng nhập số tiền mua hợp lệ, lớn hơn 0 VNĐ.');
-      if (boughtAt === null) return showError('Vui lòng chọn ngày mua hàng hợp lệ.');
-      if (refundedAt === null) return showError('Vui lòng chọn ngày tính hoàn hợp lệ.');
-      if (refundedAt < boughtAt) return showError('Ngày tính hoàn không được trước ngày mua hàng.');
-      const days = Math.round((refundedAt - boughtAt) / 86400000);
-      const manual = document.querySelector('input[name="rateMode"]:checked').value === 'manual';
-      const rateRaw = $('manualRate').value.trim();
-      const rate = manual ? Number(rateRaw) : policyRate(days);
-      if (manual && (rateRaw === '' || !Number.isFinite(rate) || rate < 0 || rate > 100)) return showError('Tỷ lệ hoàn phải là số từ 0 đến 100%.');
-      if (!Number.isFinite(rate) || rate < 0 || rate > 100) return showError('Chính sách hoàn tiền chưa hợp lệ.');
-      const refundedAmount = Math.round(amount * rate / 100);
-      const deduction = amount - refundedAmount;
-      $('outPurchase').textContent = formatDate(purchaseInput.value);
-      $('outRefund').textContent = formatDate(refundInput.value);
-      $('outDays').textContent = `${days} ngày`;
-      $('outAmount').textContent = currency(amount);
-      $('outRate').textContent = `${new Intl.NumberFormat('vi-VN',{maximumFractionDigits:8}).format(rate)}%`;
-      $('outDeduction').textContent = currency(deduction);
-      $('refundTotal').textContent = currency(refundedAmount);
-      $('resultNote').textContent = manual ? 'Tính theo tỷ lệ do bạn nhập.' : 'Tính theo chính sách hoàn tiền mẫu.';
-      $('copyBtn').disabled = false;
-      const outRate = $('outRate').textContent;
-      copiedText = `KẾT QUẢ TÍNH TIỀN HOÀN\nNgày mua: ${formatDate(purchaseInput.value)}\nNgày tính hoàn: ${formatDate(refundInput.value)}\nSố ngày đã qua: ${days} ngày\nSố tiền mua: ${currency(amount)}\nTỷ lệ hoàn: ${outRate}\nSố tiền khấu trừ: ${currency(deduction)}\nTỔNG TIỀN HOÀN: ${currency(refundedAmount)}`;
-      $('resultArea').classList.remove('animate'); void $('resultArea').offsetWidth; $('resultArea').classList.add('animate');
-    });
-    $('copyBtn').addEventListener('click', async () => {
-      if (!copiedText) return;
-      const btn = $('copyBtn');
-      try {
-        if (navigator.clipboard && window.isSecureContext) await navigator.clipboard.writeText(copiedText);
-        else {
-          const temp = document.createElement('textarea'); temp.value = copiedText; temp.style.position='fixed'; temp.style.opacity='0'; document.body.append(temp); temp.select();
-          const success = document.execCommand('copy'); temp.remove(); if (!success) throw new Error('Không thể sao chép');
-        }
-        btn.textContent='✓ ĐÃ SAO CHÉP';
-        window.setTimeout(() => btn.textContent='▣ SAO CHÉP KẾT QUẢ', 1800);
-      } catch { showError('Trình duyệt không cho phép sao chép tự động. Vui lòng thử lại hoặc sao chép thủ công.'); }
-    });
-    $('resetBtn').addEventListener('click', () => {
-      $('refundForm').reset(); refundInput.value=todayLocal(); clearError(); updateRateMode();
-      $('copyBtn').textContent='▣ SAO CHÉP KẾT QUẢ'; amountInput.focus();
-    });
-    $('themeBtn').addEventListener('click', () => {
-      const dark = document.documentElement.dataset.theme !== 'dark';
-      document.documentElement.dataset.theme = dark ? 'dark' : 'light';
-      $('themeBtn').textContent = dark ? '☀ Chế độ sáng' : '☾ Chế độ tối';
-    });
-    refundInput.value=todayLocal(); renderPolicy();
+    $('resetButton').addEventListener('click',()=>{$('refundForm').reset();setToday();$('error').classList.remove('show');$('results').classList.add('hidden');$('placeholder').classList.remove('hidden');copyText='';$('copyButton').textContent='📋 SAO CHÉP KẾT QUẢ';});
+    $('copyButton').addEventListener('click',async()=>{try{if(navigator.clipboard&&window.isSecureContext){await navigator.clipboard.writeText(copyText);}else{const area=document.createElement('textarea');area.value=copyText;area.style.position='fixed';area.style.opacity='0';document.body.append(area);area.select();const ok=document.execCommand('copy');area.remove();if(!ok)throw Error('Không thể sao chép');}$('copyButton').textContent='✓ ĐÃ SAO CHÉP';}catch(e){$('copyButton').textContent='Không sao chép được — vui lòng thử lại';}});
+    $('themeToggle').addEventListener('click',()=>{document.body.classList.toggle('dark');const dark=document.body.classList.contains('dark');$('themeToggle').textContent=dark?'☀️ Chế độ sáng':'🌙 Chế độ tối';});
+    setToday();
   </script>
 </body>
 </html>
