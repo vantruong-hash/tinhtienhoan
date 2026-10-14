@@ -1,116 +1,698 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="vi">
+
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <meta name="theme-color" content="#eef4ff">
-  <title>Tính Tiền Hoàn Sản Phẩm Online</title>
-  <style>
-    :root{font-family:Inter,system-ui,-apple-system,"Segoe UI",sans-serif;color-scheme:light;--bg:#eef4ff;--panel:#fff;--text:#172b4d;--muted:#687991;--border:#dbe5f2;--primary:#2563eb;--primarydeep:#1d4ed8;--green:#087b4a;--greensoft:#ecfdf5;--shadow:0 18px 54px rgba(30,64,120,.10)}
-    *{box-sizing:border-box}body{margin:0;background:radial-gradient(circle at top left,#dae9ff,transparent 38%),var(--bg);color:var(--text);min-height:100vh}body.dark{color-scheme:dark;--bg:#0e1728;--panel:#172338;--text:#eef4ff;--muted:#b5c1d1;--border:#35445d;--primary:#76a7ff;--primarydeep:#497ee9;--green:#8af2bf;--greensoft:#183f35;--shadow:0 18px 55px rgba(0,0,0,.25)}
-    .donate{max-width:620px;margin:28px auto 0;text-align:center;padding:23px}.donate-title{display:flex;align-items:center;justify-content:center;gap:9px;margin:0 0 8px;font-size:19px}.donate-desc{margin:0 0 18px;color:var(--muted);font-size:13px;line-height:1.7}.donate-info{display:grid;gap:10px;text-align:left;max-width:390px;margin:0 auto}.donate-line{display:flex;align-items:center;justify-content:space-between;gap:12px;font-size:14px}.donate-line span{color:var(--muted)}.donate-line strong{text-align:right;overflow-wrap:anywhere}.donate-actions{display:flex;gap:10px;align-items:center;justify-content:center;flex-wrap:wrap;margin:17px 0}.donate-qr{display:block;width:192px;height:192px;object-fit:contain;margin:14px auto 7px;border:1px solid var(--border);border-radius:14px;background:white;padding:8px}.qr-notice{font-size:12px;color:var(--muted);line-height:1.6}.donate-status{min-height:20px;font-size:12px;color:var(--green);margin-top:6px}
-    .container{max-width:1120px;margin:auto;padding:35px 18px 60px}.top{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:26px}.brand{display:flex;align-items:center;gap:12px;font-size:14px;font-weight:750;color:var(--primarydeep)}.brand-icon{display:grid;place-items:center;width:43px;height:43px;border-radius:13px;background:#dbeafe;font-size:22px}.toggle{border:1px solid var(--border);background:var(--panel);border-radius:12px;color:var(--text);padding:11px 15px;cursor:pointer;font:inherit}.heading{margin:0 0 8px;font-size:clamp(27px,4vw,39px);letter-spacing:-1px}.subtitle{color:var(--muted);margin:0 0 28px;line-height:1.6}.columns{display:grid;grid-template-columns:1.08fr .92fr;gap:22px;align-items:start}.panel{background:var(--panel);border:1px solid var(--border);box-shadow:var(--shadow);border-radius:22px;padding:25px}.panel h2{font-size:20px;margin:0 0 7px}.panel .hint{font-size:13px;color:var(--muted);line-height:1.5;margin:0 0 22px}.form-grid{display:grid;grid-template-columns:minmax(0,1fr);gap:17px}.field{display:flex;flex-direction:column;gap:8px}.field.full{grid-column:1/-1}label{font-size:13px;font-weight:700}input{width:100%;height:47px;background:var(--panel);border:1px solid var(--border);border-radius:11px;padding:0 12px;font:inherit;font-size:15px;color:var(--text);outline:0;min-width:0}input:focus{border-color:var(--primary);box-shadow:0 0 0 3px rgba(37,99,235,.12)}input::placeholder{color:#94a3b8}.note{font-size:12px;color:var(--muted);line-height:1.55}.actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:25px}button{font:inherit;font-weight:700;cursor:pointer;transition:transform .15s,background .15s}button:hover{transform:translateY(-1px)}.primary{border:0;border-radius:12px;background:#2563eb;color:white;padding:14px 21px;flex:1}.primary:hover{background:#1d4ed8}.secondary{border:1px solid var(--border);background:var(--panel);color:var(--text);padding:13px 17px;border-radius:12px}.error{display:none;margin-top:16px;padding:12px;border-radius:10px;background:#fff0f0;color:#a51d2d;font-size:13px;line-height:1.5}.error.show{display:block}.badge{display:inline-flex;align-items:center;gap:6px;border-radius:30px;padding:6px 10px;background:var(--greensoft);color:var(--green);font-size:12px;font-weight:800}.amount-card{background:linear-gradient(135deg,#effdf5,#e6f8ef);padding:22px;border-radius:17px;margin:20px 0;color:#075d38}.dark .amount-card{background:#124032;color:#c5ffdf}.amount-card .caption{font-size:12px;font-weight:800;letter-spacing:.55px}.amount{font-weight:850;font-size:clamp(26px,4vw,39px);letter-spacing:-.8px;margin-top:9px;overflow-wrap:anywhere}.small{font-size:12px;opacity:.85;margin-top:7px}.details{display:grid;gap:0}.detail{display:flex;justify-content:space-between;align-items:flex-start;gap:16px;border-bottom:1px solid var(--border);padding:13px 0;font-size:14px}.detail:last-child{border:0}.detail span:first-child{color:var(--muted)}.detail strong{text-align:right;overflow-wrap:anywhere;max-width:60%}.section-label{font-size:12px;font-weight:800;letter-spacing:1px;text-transform:uppercase;color:var(--muted);margin:22px 0 3px}.copy{width:100%;margin-top:21px}.placeholder{display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:315px;text-align:center;color:var(--muted);gap:12px}.placeholder .symbol{font-size:48px}.placeholder h3{color:var(--text);margin:0}.placeholder p{max-width:280px;line-height:1.6;margin:0;font-size:14px}.hidden{display:none!important}.footnote{font-size:12px;line-height:1.7;color:var(--muted);margin-top:22px}.result-enter{animation:rise .3s ease-out}@keyframes rise{from{opacity:.1;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}@media(max-width:800px){.columns{grid-template-columns:1fr}}@media(max-width:480px){.container{padding:20px 12px 45px}.panel{padding:19px;border-radius:17px}.form-grid{grid-template-columns:1fr}.heading{font-size:28px}.actions>*{width:100%}}
-  </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description"
+    content="MailMaster – Hệ thống tạo và quản lý email theo tên miền riêng. Nhận thư 24/7, lấy mã OTP tự động, quản lý hàng loạt địa chỉ email." />
+  <title>MailMaster – Quản lý Email Tên Miền Riêng</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+    rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
 </head>
+
 <body>
-  <main class="container">
-    <header class="top"><div class="brand"><span class="brand-icon">↩</span> HOÀN TIỀN SẢN PHẨM</div><button type="button" class="toggle" id="themeToggle" aria-label="Đổi giao diện sáng tối">🌙 Chế độ tối</button></header>
-    <h1 class="heading">Tính tiền hoàn sản phẩm</h1>
-    <p class="subtitle">Nhập thông tin đơn hàng để tính giá trị thời gian còn lại của sản phẩm và khoản hoàn sau khi trừ 5% phí.</p>
-    <div class="columns">
-      <section class="panel" aria-labelledby="inputHeading">
-        <h2 id="inputHeading">📋 Thông tin sản phẩm</h2><p class="hint">Điền đầy đủ các thông tin bên dưới. Nhập số ngày sử dụng của acc (ví dụ: 30, 60, 90 ngày). </p>
-        <form id="refundForm" novalidate>
-          <div class="form-grid">
-            <div class="field"><label for="buyer">Tên người mua</label><input id="buyer" type="text" maxlength="120" placeholder="Nguyễn Văn A" required autocomplete="name"></div>
-            <div class="field"><label for="product">Tên sản phẩm</label><input id="product" type="text" maxlength="150" placeholder="Tên mặt hàng" required></div>
-            <div class="field"><label for="money">Số tiền mua (VNĐ)</label><input id="money" type="text" inputmode="numeric" placeholder="Ví dụ: 1.500.000" required><span class="note">Tổng số tiền của toàn bộ số lượng sản phẩm.</span></div>
-            <div class="field"><label for="quantity">Số lượng</label><input id="quantity" type="number" min="1" max="1000000" step="1" value="1" required></div>
-            <div class="field"><label for="duration">Acc có date bao nhiêu ngày?</label><input id="duration" type="number" inputmode="numeric" min="1" max="1000000" step="1" placeholder="Ví dụ: 30" required><span class="note">Tổng số ngày sử dụng của acc tính từ ngày mua.</span></div>
-            <div class="field"><label for="purchase">Ngày mua</label><input id="purchase" type="date" required></div>
-            <div class="field"><label for="refund">Ngày hoàn tiền</label><input id="refund" type="date" required></div>
-          </div>
-          <div class="error" id="error" role="alert" aria-live="polite"></div>
-          <div class="actions"><button class="primary" type="submit">💰 TÍNH TIỀN HOÀN</button><button class="secondary" id="resetButton" type="button">↻ LÀM MỚI</button></div>
-        </form>
-      </section>
-      <section class="panel" aria-labelledby="resultHeading">
-        <h2 id="resultHeading">🧾 Kết quả hoàn tiền</h2><p class="hint">Kết quả được tính theo tỷ lệ thời gian sử dụng, không áp dụng bảng mức hoàn.</p>
-        <div id="placeholder" class="placeholder"><div class="symbol">🧮</div><h3>Chưa có kết quả</h3><p>Nhập thông tin bên trái rồi bấm “Tính tiền hoàn” để xem chi tiết.</p></div>
-        <div id="results" class="hidden" aria-live="polite">
-          <span class="badge">✓ Đã tính toán</span>
-          <div class="amount-card"><div class="caption">TỔNG SỐ TIỀN ĐƯỢC HOÀN</div><div class="amount" id="rAmount">0 VNĐ</div><div class="small">Đã trừ 5% phí hoàn sản phẩm</div></div>
-          <div class="section-label">Thông tin đơn hàng</div>
-          <div class="details"><div class="detail"><span>Tên người mua</span><strong id="rBuyer"></strong></div><div class="detail"><span>Tên sản phẩm</span><strong id="rProduct"></strong></div><div class="detail"><span>Số lượng</span><strong id="rQuantity"></strong></div><div class="detail"><span>Ngày mua</span><strong id="rPurchase"></strong></div><div class="detail"><span>Ngày hoàn</span><strong id="rRefund"></strong></div><div class="detail"><span>Acc có date</span><strong id="rDuration"></strong></div></div>
-          <div class="section-label">Chi tiết tính toán</div>
-          <div class="details"><div class="detail"><span>Số ngày thiếu (còn lại của acc)</span><strong id="rRemaining"></strong></div><div class="detail"><span>Số ngày đã sử dụng</span><strong id="rUsed"></strong></div><div class="detail"><span>Tổng date acc</span><strong id="rTotalDays"></strong></div><div class="detail"><span>Giá trị ước tính / 1 ngày</span><strong id="rDaily"></strong></div><div class="detail"><span>Giá trị còn lại trước phí</span><strong id="rBase"></strong></div><div class="detail"><span>Phí hoàn sản phẩm (5%)</span><strong id="rFee"></strong></div></div>
-          <button class="secondary copy" type="button" id="copyButton">📋 SAO CHÉP KẾT QUẢ</button>
-        </div>
-        <div class="footnote">Công thức: <strong>Số ngày đã dùng = Ngày hoàn − Ngày mua; Số ngày còn lại = Max(0, Date acc − Số ngày đã dùng)</strong>.<br>Tiền hoàn = Tiền mua × (Số ngày còn lại / Date acc) × 95%. Nếu acc đã hết date, tiền hoàn bằng 0 VNĐ. Đây là phép tính ước tính theo thời gian.</div>
-      </section>
+  <!-- LOGIN SCREEN -->
+  <div id="loginScreen" class="login-screen">
+    <div class="login-bg">
+      <div class="login-orb orb1"></div>
+      <div class="login-orb orb2"></div>
+      <div class="login-orb orb3"></div>
     </div>
-    <section class="panel donate" aria-labelledby="donateHeading">
-      <h2 id="donateHeading" class="donate-title">❤️ Ủng hộ / Donate</h2>
-      <p class="donate-desc">Nếu công cụ hữu ích, bạn có thể ủng hộ mình một ly cà phê ☕<br>Hoàn toàn tự nguyện, không ảnh hưởng đến việc sử dụng công cụ.</p>
-      <div class="donate-info">
-        <div class="donate-line"><span>Ngân hàng</span><strong>MB BANK</strong></div>
-        <div class="donate-line"><span>Số tài khoản</span><strong id="donateAccount">0981251350</strong></div>
-        <div class="donate-line"><span>Chủ tài khoản</span><strong>DINH VAN TRUONG</strong></div>
+    <div class="login-card">
+      <div class="login-logo">
+        <div class="logo-icon">✉</div>
+        <h1>MailMaster</h1>
+        <p>Quản lý email theo tên miền riêng</p>
       </div>
-      <div class="donate-actions"><button class="primary" style="flex:0 1 auto" type="button" id="copyAccount">📋 SAO CHÉP STK</button></div>
-      <img class="donate-qr" alt="Mã QR VietQR để chuyển khoản ủng hộ tài khoản MB BANK 0981251350, DINH VAN TRUONG" width="192" height="192" loading="lazy" referrerpolicy="no-referrer" src="https://img.vietqr.io/image/MB-0981251350-compact2.png?accountName=DINH%20VAN%20TRUONG">
-      <div class="qr-notice" id="qrNotice">Quét mã QR bằng ứng dụng ngân hàng để chuyển khoản.<br>Mã QR cần kết nối Internet để hiển thị.</div>
-      <div class="donate-status" id="donateStatus" role="status" aria-live="polite"></div>
-    </section>
-  </main>
-  <script>
-    'use strict';
-    // Mức phí hoàn cố định, có thể đổi tại đây.
-    const REFUND_FEE_RATE = 0.05;
-    const $ = id => document.getElementById(id);
-    const formatMoney = n => Math.round(n).toLocaleString('vi-VN') + ' VNĐ';
-    const formatDay = s => { const [y,m,d] = s.split('-'); return `${d}/${m}/${y}`; };
-    // Dùng UTC để phép trừ ngày không bị ảnh hưởng bởi DST / giờ địa phương.
-    const toUTCday = s => { const [y,m,d] = s.split('-').map(Number); const date=new Date(Date.UTC(y,m-1,d)); return date.getUTCFullYear()===y && date.getUTCMonth()===m-1 && date.getUTCDate()===d ? date.getTime()/86400000 : NaN; };
-    const todayLocal = () => {const d=new Date();return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;};
-    const setToday = () => { $('refund').value=todayLocal(); };
-    const error = msg => { $('error').textContent=msg; $('error').classList.add('show'); $('results').classList.add('hidden'); $('placeholder').classList.remove('hidden'); };
-    const value = id => $(id).value.trim();
-    let copyText = '';
-    $('money').addEventListener('input', e => { let raw=e.target.value.replace(/\D/g,'').replace(/^0+(?=\d)/,''); e.target.value=raw ? Number(raw).toLocaleString('vi-VN') : ''; });
-    $('refundForm').addEventListener('submit', e => {
-      e.preventDefault();$('error').classList.remove('show');
-      const buyer=value('buyer'),product=value('product'),purchase=value('purchase'),refund=value('refund');
-      const rawMoney=value('money').replace(/\D/g,'');
-      const money=Number(rawMoney),quantity=Number(value('quantity')),duration=Number(value('duration'));
-      if(!buyer||!product||!purchase||!refund||!rawMoney||!value('quantity')||!value('duration')) return error('Vui lòng nhập đầy đủ tất cả thông tin.');
-      if(!Number.isSafeInteger(money)||money<=0) return error('Số tiền mua phải là số nguyên dương hợp lệ.');
-      if(!Number.isSafeInteger(quantity)||quantity<=0||quantity>1000000) return error('Số lượng phải là số nguyên từ 1 đến 1.000.000.');
-      if(!Number.isSafeInteger(duration)||duration<1||duration>1000000) return error('Date acc phải là số nguyên từ 1 đến 1.000.000 ngày.');
-      const p=toUTCday(purchase),r=toUTCday(refund);
-      if(![p,r].every(Number.isFinite)) return error('Một hoặc nhiều ngày không hợp lệ.');
-      if(r<p) return error('Ngày hoàn tiền không được trước ngày mua.');
-      const totalDays=duration, used=Math.min(r-p,totalDays),remaining=Math.max(0,totalDays-(r-p));
-      const daily=money/totalDays,base=money*remaining/totalDays,fee=base*REFUND_FEE_RATE,finalRefund=Math.round(base-fee);
-      const fields={rBuyer:buyer,rProduct:product,rQuantity:quantity.toLocaleString('vi-VN'),rPurchase:formatDay(purchase),rRefund:formatDay(refund),rDuration:duration.toLocaleString('vi-VN')+' ngày',rRemaining:remaining+' ngày',rUsed:used+' ngày',rTotalDays:totalDays+' ngày',rDaily:daily.toLocaleString('vi-VN',{maximumFractionDigits:2})+' VNĐ/ngày',rBase:formatMoney(base),rFee:formatMoney(fee),rAmount:formatMoney(finalRefund)};
-      for(const [id,text] of Object.entries(fields)) $(id).textContent=text;
-      copyText=['KẾT QUẢ HOÀN TIỀN',`Tên người mua: ${buyer}`,`Tên sản phẩm: ${product}`,`Số lượng: ${fields.rQuantity}`,`Tiền mua: ${formatMoney(money)}`,`Ngày mua: ${fields.rPurchase}`,`Ngày hoàn: ${fields.rRefund}`,`Date acc: ${fields.rDuration}`,`Số ngày thiếu: ${fields.rRemaining}`,`Số ngày đã sử dụng: ${fields.rUsed}`,`Giá trị ước tính / 1 ngày: ${fields.rDaily}`,`Giá trị còn lại trước phí: ${fields.rBase}`,`Phí hoàn (5%): ${fields.rFee}`,`TỔNG SỐ TIỀN ĐƯỢC HOÀN: ${fields.rAmount}`].join('\n');
-      $('placeholder').classList.add('hidden');$('results').classList.remove('hidden');$('results').classList.remove('result-enter');void $('results').offsetWidth;$('results').classList.add('result-enter');
-    });
-    $('resetButton').addEventListener('click',()=>{$('refundForm').reset();setToday();$('error').classList.remove('show');$('results').classList.add('hidden');$('placeholder').classList.remove('hidden');copyText='';$('copyButton').textContent='📋 SAO CHÉP KẾT QUẢ';});
-    $('copyButton').addEventListener('click',async()=>{try{if(navigator.clipboard&&window.isSecureContext){await navigator.clipboard.writeText(copyText);}else{const area=document.createElement('textarea');area.value=copyText;area.style.position='fixed';area.style.opacity='0';document.body.append(area);area.select();const ok=document.execCommand('copy');area.remove();if(!ok)throw Error('Không thể sao chép');}$('copyButton').textContent='✓ ĐÃ SAO CHÉP';}catch(e){$('copyButton').textContent='Không sao chép được — vui lòng thử lại';}});
-    $('themeToggle').addEventListener('click',()=>{document.body.classList.toggle('dark');const dark=document.body.classList.contains('dark');$('themeToggle').textContent=dark?'☀️ Chế độ sáng':'🌙 Chế độ tối';});
-    const copyPlainText = async text => {
-      if (navigator.clipboard && window.isSecureContext) return navigator.clipboard.writeText(text);
-      const area=document.createElement('textarea');area.value=text;area.style.position='fixed';area.style.opacity='0';document.body.appendChild(area);area.select();
-      const ok=document.execCommand('copy');area.remove();if(!ok) throw new Error('Copy failed');
-    };
-    $('copyAccount').addEventListener('click',async()=>{
-      try { await copyPlainText('0981251350');$('donateStatus').textContent='✓ Đã sao chép số tài khoản 0981251350';$('copyAccount').textContent='✓ ĐÃ SAO CHÉP STK'; }
-      catch { $('donateStatus').textContent='Không thể tự động sao chép. Hãy chọn và sao chép số tài khoản phía trên.'; }
-    });
-    document.querySelector('.donate-qr').addEventListener('error',()=>{$('qrNotice').textContent='Chưa tải được mã QR. Bạn vẫn có thể chuyển khoản bằng thông tin tài khoản ở trên.';});
-    setToday();
-  </script>
+      <form id="loginForm" class="login-form">
+        <div class="form-group">
+          <label for="loginUser">Tên đăng nhập</label>
+          <input id="loginUser" type="text" placeholder="admin" autocomplete="username" />
+        </div>
+        <div class="form-group">
+          <label for="loginPass">Mật khẩu</label>
+          <input id="loginPass" type="password" placeholder="••••••••" autocomplete="current-password" />
+        </div>
+        <div id="loginError" class="login-error hidden">Sai tên đăng nhập hoặc mật khẩu</div>
+        <button type="submit" class="btn-login" id="loginBtn">Đăng nhập</button>
+      </form>
+      <div class="login-hint">Demo: admin / admin123</div>
+    </div>
+  </div>
+
+  <!-- MAIN APP -->
+  <div id="app" class="app hidden">
+    <!-- SIDEBAR -->
+    <aside class="sidebar" id="sidebar">
+      <div class="sidebar-header">
+        <div class="sidebar-logo">
+          <span class="logo-icon-sm">✉</span>
+          <span class="logo-text">MailMaster</span>
+        </div>
+        <button class="sidebar-close" id="sidebarClose" aria-label="Đóng menu">✕</button>
+      </div>
+
+      <nav class="sidebar-nav">
+        <a href="#" class="nav-item active" data-page="dashboard" id="nav-dashboard">
+          <span class="nav-icon">⊞</span>
+          <span>Tổng quan</span>
+        </a>
+        <a href="#" class="nav-item" data-page="domains" id="nav-domains">
+          <span class="nav-icon">🌐</span>
+          <span>Tên miền</span>
+        </a>
+        <a href="#" class="nav-item" data-page="emails" id="nav-emails">
+          <span class="nav-icon">📧</span>
+          <span>Địa chỉ email</span>
+          <span class="nav-badge" id="emailCountBadge">0</span>
+        </a>
+        <a href="#" class="nav-item" data-page="inbox" id="nav-inbox">
+          <span class="nav-icon">📥</span>
+          <span>Hộp thư đến</span>
+          <span class="nav-badge unread" id="inboxBadge">0</span>
+        </a>
+        <a href="#" class="nav-item" data-page="bulk" id="nav-bulk">
+          <span class="nav-icon">⚡</span>
+          <span>Tạo hàng loạt</span>
+        </a>
+        <a href="#" class="nav-item" data-page="settings" id="nav-settings">
+          <span class="nav-icon">⚙</span>
+          <span>Cài đặt</span>
+        </a>
+      </nav>
+
+      <div class="sidebar-footer">
+        <div class="user-info">
+          <div class="user-avatar" id="userAvatar">A</div>
+          <div class="user-details">
+            <span class="user-name" id="userNameDisplay">admin</span>
+            <span class="user-role">Quản trị viên</span>
+          </div>
+        </div>
+        <button class="btn-logout" id="logoutBtn" title="Đăng xuất">⏻</button>
+      </div>
+    </aside>
+
+    <!-- MAIN CONTENT -->
+    <main class="main-content">
+      <!-- TOP BAR -->
+      <header class="topbar">
+        <button class="hamburger" id="hamburger" aria-label="Mở menu">☰</button>
+        <div class="topbar-title" id="topbarTitle">Tổng quan</div>
+        <div class="topbar-actions">
+          <div class="domain-badge" id="topDomainBadge">
+            <span class="domain-dot"></span>
+            <span id="activeDomainLabel">Chưa có tên miền</span>
+          </div>
+          <button class="btn-icon" id="refreshBtn" title="Làm mới">↻</button>
+          <button class="btn-icon bell-btn" id="notifBtn" title="Thông báo">
+            🔔
+            <span class="bell-badge hidden" id="bellBadge">0</span>
+          </button>
+        </div>
+      </header>
+
+      <!-- PAGES -->
+      <div class="page-container">
+
+        <!-- DASHBOARD PAGE -->
+        <div id="page-dashboard" class="page active">
+          <div class="page-header">
+            <h1>Tổng quan hệ thống</h1>
+            <p>Chào mừng trở lại! Đây là thống kê tổng quan.</p>
+          </div>
+          <div class="stats-grid">
+            <div class="stat-card" id="stat-domains">
+              <div class="stat-icon">🌐</div>
+              <div class="stat-info">
+                <div class="stat-value" id="statDomains">0</div>
+                <div class="stat-label">Tên miền</div>
+              </div>
+            </div>
+            <div class="stat-card" id="stat-emails">
+              <div class="stat-icon">📧</div>
+              <div class="stat-info">
+                <div class="stat-value" id="statEmails">0</div>
+                <div class="stat-label">Địa chỉ email</div>
+              </div>
+            </div>
+            <div class="stat-card highlight" id="stat-messages">
+              <div class="stat-icon">📩</div>
+              <div class="stat-info">
+                <div class="stat-value" id="statMessages">0</div>
+                <div class="stat-label">Tổng thư nhận</div>
+              </div>
+            </div>
+            <div class="stat-card danger" id="stat-unread">
+              <div class="stat-icon">🔔</div>
+              <div class="stat-info">
+                <div class="stat-value" id="statUnread">0</div>
+                <div class="stat-label">Thư chưa đọc</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="dashboard-grid">
+            <div class="card">
+              <div class="card-header">
+                <h2>Thư đến gần đây</h2>
+                <button class="btn-sm" onclick="app.navigate('inbox')">Xem tất cả</button>
+              </div>
+              <div id="recentMessages" class="recent-list">
+                <div class="empty-state">
+                  <span>📭</span>
+                  <p>Chưa có thư nào</p>
+                </div>
+              </div>
+            </div>
+            <div class="card">
+              <div class="card-header">
+                <h2>Email mới tạo</h2>
+                <button class="btn-sm" onclick="app.navigate('emails')">Quản lý</button>
+              </div>
+              <div id="recentEmails" class="recent-list">
+                <div class="empty-state">
+                  <span>📭</span>
+                  <p>Chưa có địa chỉ nào</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- QUICK ACTIONS -->
+          <div class="card">
+            <div class="card-header">
+              <h2>Thao tác nhanh</h2>
+            </div>
+            <div class="quick-actions">
+              <button class="quick-action-btn" onclick="app.navigate('domains'); app.openAddDomain()">
+                <span>🌐</span>
+                <span>Thêm tên miền</span>
+              </button>
+              <button class="quick-action-btn" onclick="app.navigate('emails'); app.openAddEmail()">
+                <span>➕</span>
+                <span>Tạo email mới</span>
+              </button>
+              <button class="quick-action-btn" onclick="app.navigate('bulk')">
+                <span>⚡</span>
+                <span>Tạo hàng loạt</span>
+              </button>
+              <button class="quick-action-btn" onclick="app.navigate('inbox'); app.simulateIncomingMail()">
+                <span>📩</span>
+                <span>Mô phỏng nhận thư</span>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- DOMAINS PAGE -->
+        <div id="page-domains" class="page">
+          <div class="page-header">
+            <div>
+              <h1>Quản lý tên miền</h1>
+              <p>Kết nối và quản lý các tên miền email của bạn.</p>
+            </div>
+            <button class="btn-primary" id="addDomainBtn">+ Thêm tên miền</button>
+          </div>
+
+          <div id="domainsList" class="domains-list">
+            <div class="empty-state big">
+              <span>🌐</span>
+              <h3>Chưa có tên miền nào</h3>
+              <p>Thêm tên miền để bắt đầu tạo địa chỉ email</p>
+              <button class="btn-primary" onclick="app.openAddDomain()">+ Thêm tên miền đầu tiên</button>
+            </div>
+          </div>
+
+          <!-- DNS Guide -->
+          <div class="card dns-guide">
+            <div class="card-header">
+              <h2>📋 Hướng dẫn cấu hình DNS</h2>
+            </div>
+            <div class="dns-steps">
+              <div class="dns-step">
+                <div class="step-num">1</div>
+                <div>
+                  <strong>Thêm bản ghi MX</strong>
+                  <p>Trỏ MX record về IP server của bạn (priority: 10)</p>
+                  <code>MX @ mail.yourdomain.com 10</code>
+                </div>
+              </div>
+              <div class="dns-step">
+                <div class="step-num">2</div>
+                <div>
+                  <strong>Thêm bản ghi A/AAAA</strong>
+                  <p>Trỏ mail subdomain về IP server</p>
+                  <code>A mail [YOUR_SERVER_IP]</code>
+                </div>
+              </div>
+              <div class="dns-step">
+                <div class="step-num">3</div>
+                <div>
+                  <strong>Cấu hình SPF (khuyến nghị)</strong>
+                  <p>Cho phép server gửi thư thay mặt domain</p>
+                  <code>TXT @ "v=spf1 mx ~all"</code>
+                </div>
+              </div>
+              <div class="dns-step">
+                <div class="step-num">4</div>
+                <div>
+                  <strong>Mở port SMTP</strong>
+                  <p>Mở port 25 (SMTP) trên firewall/VPS của bạn</p>
+                  <code>ufw allow 25/tcp</code>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- EMAIL ADDRESSES PAGE -->
+        <div id="page-emails" class="page">
+          <div class="page-header">
+            <div>
+              <h1>Địa chỉ email</h1>
+              <p>Tạo và quản lý các địa chỉ email trong hệ thống.</p>
+            </div>
+            <div class="header-actions">
+              <button class="btn-secondary" id="exportCsvBtn">↓ Xuất CSV</button>
+              <label class="btn-secondary" for="importCsvInput">↑ Nhập CSV</label>
+              <input type="file" id="importCsvInput" accept=".csv" class="hidden" />
+              <button class="btn-primary" id="addEmailBtn">+ Tạo email</button>
+            </div>
+          </div>
+
+          <div class="search-bar">
+            <input type="text" id="emailSearchInput" placeholder="🔍  Tìm kiếm địa chỉ email..." class="search-input" />
+            <select id="emailDomainFilter" class="filter-select">
+              <option value="">Tất cả tên miền</option>
+            </select>
+          </div>
+
+          <div class="table-wrapper">
+            <table class="data-table" id="emailsTable">
+              <thead>
+                <tr>
+                  <th><input type="checkbox" id="selectAllEmails" /></th>
+                  <th>Địa chỉ email</th>
+                  <th>Tên miền</th>
+                  <th>Thư đến</th>
+                  <th>Tạo lúc</th>
+                  <th>Trạng thái</th>
+                  <th>Thao tác</th>
+                </tr>
+              </thead>
+              <tbody id="emailsTableBody">
+                <tr>
+                  <td colspan="7" class="table-empty">
+                    <div class="empty-state">
+                      <span>📧</span>
+                      <p>Chưa có địa chỉ email nào. <a href="#" onclick="app.openAddEmail()">Tạo ngay!</a></p>
+                    </div>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="table-footer">
+            <div class="bulk-actions hidden" id="bulkActions">
+              <button class="btn-danger-sm" id="bulkDeleteBtn">🗑 Xóa đã chọn</button>
+              <button class="btn-secondary-sm" id="bulkExportBtn">↓ Xuất đã chọn</button>
+            </div>
+            <div class="pagination" id="emailPagination"></div>
+          </div>
+        </div>
+
+        <!-- INBOX PAGE -->
+        <div id="page-inbox" class="page">
+          <div class="page-header">
+            <div>
+              <h1>Hộp thư đến</h1>
+              <p>Tất cả thư nhận vào hệ thống của bạn.</p>
+            </div>
+            <div class="header-actions">
+              <button class="btn-secondary" id="markAllReadBtn">✓ Đánh dấu đã đọc</button>
+              <button class="btn-primary" id="simulateMailBtn">📩 Mô phỏng thư đến</button>
+            </div>
+          </div>
+
+          <div class="inbox-layout">
+            <!-- Message list -->
+            <div class="message-list-panel">
+              <div class="search-bar">
+                <input type="text" id="inboxSearch" placeholder="🔍  Tìm trong hộp thư..." class="search-input" />
+                <select id="inboxEmailFilter" class="filter-select">
+                  <option value="">Tất cả email</option>
+                </select>
+              </div>
+              <div id="messageList" class="message-list">
+                <div class="empty-state">
+                  <span>📭</span>
+                  <p>Hộp thư trống</p>
+                  <button class="btn-primary" onclick="app.simulateIncomingMail()">Mô phỏng thư đến</button>
+                </div>
+              </div>
+            </div>
+
+            <!-- Message detail -->
+            <div class="message-detail-panel" id="messageDetail">
+              <div class="message-detail-empty">
+                <span>📨</span>
+                <p>Chọn một thư để xem nội dung</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- BULK CREATE PAGE -->
+        <div id="page-bulk" class="page">
+          <div class="page-header">
+            <h1>Tạo email hàng loạt</h1>
+            <p>Tạo nhiều địa chỉ email cùng lúc nhanh chóng.</p>
+          </div>
+
+          <div class="bulk-grid">
+            <div class="card bulk-config">
+              <div class="card-header">
+                <h2>⚙ Cấu hình tạo hàng loạt</h2>
+              </div>
+              <div class="bulk-form">
+                <div class="form-row">
+                  <div class="form-group">
+                    <label>Tên miền</label>
+                    <select id="bulkDomainSelect" class="form-select">
+                      <option value="">-- Chọn tên miền --</option>
+                    </select>
+                  </div>
+                  <div class="form-group">
+                    <label>Số lượng tạo</label>
+                    <input type="number" id="bulkCount" class="form-input" value="10" min="1" max="1000"
+                      placeholder="10" />
+                  </div>
+                </div>
+                <div class="form-row">
+                  <div class="form-group">
+                    <label>Loại tên</label>
+                    <select id="bulkNameType" class="form-select">
+                      <option value="random">Tên ngẫu nhiên</option>
+                      <option value="prefix">Tiền tố + số</option>
+                      <option value="custom">Danh sách tùy chọn</option>
+                    </select>
+                  </div>
+                  <div class="form-group" id="prefixGroup" style="display:none">
+                    <label>Tiền tố</label>
+                    <input type="text" id="bulkPrefix" class="form-input" placeholder="user, test, mail..." />
+                  </div>
+                </div>
+                <div class="form-group" id="customListGroup" style="display:none">
+                  <label>Danh sách tên (mỗi dòng một tên)</label>
+                  <textarea id="bulkCustomList" class="form-textarea" rows="6"
+                    placeholder="alice&#10;bob&#10;charlie&#10;..."></textarea>
+                </div>
+                <div class="form-actions">
+                  <button class="btn-secondary" id="previewBulkBtn">👁 Xem trước</button>
+                  <button class="btn-primary" id="createBulkBtn">⚡ Tạo ngay</button>
+                </div>
+              </div>
+            </div>
+
+            <div class="card bulk-preview">
+              <div class="card-header">
+                <h2>📋 Xem trước</h2>
+                <span id="previewCount" class="badge">0 email</span>
+              </div>
+              <div id="bulkPreviewList" class="bulk-preview-list">
+                <div class="empty-state">
+                  <span>⚡</span>
+                  <p>Nhấn "Xem trước" để kiểm tra danh sách</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Import/Export section -->
+          <div class="card">
+            <div class="card-header">
+              <h2>📂 Nhập / Xuất dữ liệu</h2>
+            </div>
+            <div class="import-export-grid">
+              <div class="ie-card">
+                <div class="ie-icon">↑</div>
+                <h3>Nhập từ CSV</h3>
+                <p>File CSV có cột: email, domain (không bắt buộc)</p>
+                <label class="btn-primary" for="bulkCsvImport">Chọn file CSV</label>
+                <input type="file" id="bulkCsvImport" accept=".csv" class="hidden" />
+              </div>
+              <div class="ie-card">
+                <div class="ie-icon">↓</div>
+                <h3>Xuất ra CSV</h3>
+                <p>Tải về toàn bộ danh sách email hiện tại</p>
+                <button class="btn-primary" onclick="app.exportCsv()">Tải xuống CSV</button>
+              </div>
+              <div class="ie-card">
+                <div class="ie-icon">📋</div>
+                <h3>Copy danh sách</h3>
+                <p>Sao chép toàn bộ địa chỉ email vào clipboard</p>
+                <button class="btn-primary" onclick="app.copyAllEmails()">Copy tất cả</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- SETTINGS PAGE -->
+        <div id="page-settings" class="page">
+          <div class="page-header">
+            <h1>Cài đặt hệ thống</h1>
+            <p>Cấu hình tài khoản và hệ thống.</p>
+          </div>
+
+          <div class="settings-grid">
+            <div class="card">
+              <div class="card-header">
+                <h2>👤 Tài khoản</h2>
+              </div>
+              <div class="settings-form">
+                <div class="form-group">
+                  <label>Tên đăng nhập</label>
+                  <input type="text" id="settingUsername" class="form-input" />
+                </div>
+                <div class="form-group">
+                  <label>Email quản trị</label>
+                  <input type="email" id="settingEmail" class="form-input" placeholder="admin@example.com" />
+                </div>
+                <div class="form-group">
+                  <label>Mật khẩu mới</label>
+                  <input type="password" id="settingPassword" class="form-input" placeholder="Để trống nếu không đổi" />
+                </div>
+                <div class="form-group">
+                  <label>Xác nhận mật khẩu</label>
+                  <input type="password" id="settingPasswordConfirm" class="form-input"
+                    placeholder="Nhập lại mật khẩu mới" />
+                </div>
+                <button class="btn-primary" onclick="app.saveSettings()">💾 Lưu thay đổi</button>
+              </div>
+            </div>
+
+            <div class="card">
+              <div class="card-header">
+                <h2>🖥 Cấu hình SMTP Server</h2>
+              </div>
+              <div class="settings-form">
+                <div class="form-group">
+                  <label>IP / Hostname nhận thư</label>
+                  <input type="text" id="settingSmtpHost" class="form-input" placeholder="0.0.0.0" />
+                </div>
+                <div class="form-group">
+                  <label>Port SMTP</label>
+                  <input type="number" id="settingSmtpPort" class="form-input" value="25" />
+                </div>
+                <div class="form-group">
+                  <label>Thời gian lưu thư (ngày)</label>
+                  <input type="number" id="settingRetention" class="form-input" value="365" />
+                </div>
+                <div class="form-group">
+                  <label>Số thư tối đa mỗi hộp</label>
+                  <input type="number" id="settingMaxMsgs" class="form-input" value="500" />
+                </div>
+                <button class="btn-primary" onclick="app.saveSmtpSettings()">💾 Lưu cấu hình</button>
+              </div>
+            </div>
+
+            <div class="card">
+              <div class="card-header">
+                <h2>📊 Thống kê hệ thống</h2>
+              </div>
+              <div class="sys-stats">
+                <div class="sys-stat-row">
+                  <span>Tổng địa chỉ email:</span>
+                  <span id="sysStatEmails" class="value">0</span>
+                </div>
+                <div class="sys-stat-row">
+                  <span>Tổng thư nhận:</span>
+                  <span id="sysStatMessages" class="value">0</span>
+                </div>
+                <div class="sys-stat-row">
+                  <span>Tên miền đã kết nối:</span>
+                  <span id="sysStatDomains" class="value">0</span>
+                </div>
+                <div class="sys-stat-row">
+                  <span>Phiên bản:</span>
+                  <span class="value">MailMaster v1.0</span>
+                </div>
+                <div class="sys-stat-row">
+                  <span>Dung lượng ước tính:</span>
+                  <span id="sysStatStorage" class="value">0 KB</span>
+                </div>
+              </div>
+              <div style="margin-top: 1rem; display: flex; gap: .5rem; flex-wrap:wrap;">
+                <button class="btn-secondary" onclick="app.exportBackup()">💾 Sao lưu dữ liệu</button>
+                <button class="btn-danger-sm" onclick="app.clearAll()">🗑 Xóa toàn bộ dữ liệu</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div><!-- end page-container -->
+    </main>
+  </div>
+
+  <!-- MODALS -->
+  <!-- Add Domain Modal -->
+  <div class="modal-overlay hidden" id="modalAddDomain">
+    <div class="modal">
+      <div class="modal-header">
+        <h3>🌐 Thêm tên miền</h3>
+        <button class="modal-close" onclick="app.closeModal('modalAddDomain')">✕</button>
+      </div>
+      <div class="modal-body">
+        <div class="form-group">
+          <label>Tên miền <span class="required">*</span></label>
+          <input type="text" id="domainInput" class="form-input" placeholder="example.com" />
+          <small>Ví dụ: example.com, mycompany.vn</small>
+        </div>
+        <div class="form-group">
+          <label>Mô tả</label>
+          <input type="text" id="domainDesc" class="form-input" placeholder="Tên miền chính, phụ..." />
+        </div>
+        <div id="addDomainError" class="error-msg hidden"></div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn-secondary" onclick="app.closeModal('modalAddDomain')">Hủy</button>
+        <button class="btn-primary" id="saveDomainBtn">Thêm tên miền</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Add Email Modal -->
+  <div class="modal-overlay hidden" id="modalAddEmail">
+    <div class="modal">
+      <div class="modal-header">
+        <h3>📧 Tạo địa chỉ email</h3>
+        <button class="modal-close" onclick="app.closeModal('modalAddEmail')">✕</button>
+      </div>
+      <div class="modal-body">
+        <div class="email-input-group">
+          <input type="text" id="emailLocalInput" class="form-input" placeholder="tenmail" />
+          <span class="at-sign">@</span>
+          <select id="emailDomainSelect" class="form-select domain-select">
+            <option value="">-- Chọn tên miền --</option>
+          </select>
+        </div>
+        <div class="form-group" style="margin-top:1rem">
+          <label>Ghi chú</label>
+          <input type="text" id="emailNote" class="form-input" placeholder="Ghi chú cho địa chỉ này..." />
+        </div>
+        <div id="addEmailError" class="error-msg hidden"></div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn-secondary" onclick="app.closeModal('modalAddEmail')">Hủy</button>
+        <button class="btn-primary" id="saveEmailBtn">Tạo email</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Message Detail Modal -->
+  <div class="modal-overlay hidden" id="modalMessage">
+    <div class="modal modal-lg">
+      <div class="modal-header">
+        <h3 id="modalMsgSubject">Chi tiết thư</h3>
+        <button class="modal-close" onclick="app.closeModal('modalMessage')">✕</button>
+      </div>
+      <div class="modal-body">
+        <div class="msg-meta">
+          <div class="msg-meta-row"><span>Từ:</span> <strong id="modalMsgFrom"></strong></div>
+          <div class="msg-meta-row"><span>Đến:</span> <strong id="modalMsgTo"></strong></div>
+          <div class="msg-meta-row"><span>Thời gian:</span> <strong id="modalMsgTime"></strong></div>
+        </div>
+        <!-- OTP highlight -->
+        <div id="otpSection" class="otp-section hidden">
+          <div class="otp-label">🔑 Mã OTP phát hiện được:</div>
+          <div id="otpCodes" class="otp-codes"></div>
+        </div>
+        <div class="msg-body-wrapper">
+          <div id="modalMsgBody" class="msg-body"></div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn-secondary" onclick="app.closeModal('modalMessage')">Đóng</button>
+        <button class="btn-primary" id="copyOtpBtn" class="hidden">📋 Copy OTP</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Simulate Mail Modal -->
+  <div class="modal-overlay hidden" id="modalSimulate">
+    <div class="modal">
+      <div class="modal-header">
+        <h3>📩 Mô phỏng thư đến</h3>
+        <button class="modal-close" onclick="app.closeModal('modalSimulate')">✕</button>
+      </div>
+      <div class="modal-body">
+        <div class="form-group">
+          <label>Người gửi</label>
+          <input type="text" id="simFrom" class="form-input" value="noreply@example.com" />
+        </div>
+        <div class="form-group">
+          <label>Gửi đến</label>
+          <select id="simTo" class="form-select">
+            <option value="">-- Chọn email nhận --</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Tiêu đề</label>
+          <input type="text" id="simSubject" class="form-input" value="Mã xác thực của bạn" />
+        </div>
+        <div class="form-group">
+          <label>Nội dung thư</label>
+          <textarea id="simBody" class="form-textarea" rows="5">Mã xác thực của bạn là: 847291
+
+Mã này có hiệu lực trong 10 phút. Vui lòng không chia sẻ mã này với bất kỳ ai.
+
+Trân trọng,
+Đội ngũ hỗ trợ</textarea>
+        </div>
+        <div class="sim-templates">
+          <span>Templates:</span>
+          <button class="chip" onclick="app.applySimTemplate('otp')">OTP đơn giản</button>
+          <button class="chip" onclick="app.applySimTemplate('verify')">Xác thực email</button>
+          <button class="chip" onclick="app.applySimTemplate('promo')">Khuyến mãi</button>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn-secondary" onclick="app.closeModal('modalSimulate')">Hủy</button>
+        <button class="btn-primary" id="sendSimBtn">📩 Gửi thư mô phỏng</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast notification -->
+  <div id="toastContainer" class="toast-container"></div>
+
+  <script src="app.js"></script>
 </body>
+
 </html>
